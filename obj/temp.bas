@@ -36,34 +36,20 @@
 1 ' Menú de bienvenida, inicialización variables / Welcome menu, variable initialization'
 20 locate 8,10: print "!Presione una tecla":if inkey$="" then goto 20 else cls:x=16:y=144:s(0)=0:sp=0:s0=0:s1=1:s2=2:s3=3:ex=31:ey=19:es=192:ev=1
 1 ' Dibujar pantalla del juego / Draw game screen
-30 for i=0 to 31:locate i,0:print chr$(215):locate i,20:print chr$(215):next:for i=0 to 20:locate 0,i: print chr$(215):locate 32, i: print chr$(215):next:play"l10o4g":gosub 90
-1 ' Sistema de input & physics'
-40 k=stick(0):if pj=0 then oldy=y:if k=3 then x=x+8:sp=s0:swap s0,s1:else if k=7 then x=x-8:sp=s2:swap s2,s3:else if k=1 and pj=0 then pj=1
-1 ' Sistema de salto /jump system'
-50 if pj=1 and y=oldy-24 then pj=2 else if pj=1 then y=y-8 else if pj=2 then y=y+8:if y=oldy then pj=0
-1 ' Physics player & colision'
-60 if ex<x/8 and pc=0 then p=p+1:pc=1:play "l10o8gc":gosub 90 else c= base(5)+((y/8)+1)*32+(x/8)+1: if vpeek(c)>=192 then :play "l10o1c": goto 20:gosub 90
-1  'fisica bloque enemigo / physical enemy block
-70 ex=ex-ev:if ex<0 then ex=31:es=es+1:ec=ec+1:play "l10o4g":locate 0,19:print chr$(32):pc=0:if ec=10 then ev=ev+1:ec=0:if es>224 then es=192
-1 ' Render system'
-80 putsprite 0,(x,y),9,sp:ob$=chr$(es): for i=0 to ev: ob$=ob$+chr$(32):next:locate ex,ey:print ob$:goto 40
+30 for i=0 to 31:locate i,0:print chr$(215):locate i,20:print chr$(215):next:for i=0 to 20:locate 0,i: print chr$(215):locate 32, i: print chr$(215):next:play"l10o4g":gosub 40:goto 50
 1 ' GUI'
-90 locate 5,21:print "Speed:"ev" Ponits: "p:return
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+40 locate 5,21:print "Speed:"ev" Ponits: "p:return
+1 ' Sistema de input & physics'
+50 k=stick(0):if pj=0 then oldy=y:if k=3 then x=x+8:sp=s0:swap s0,s1:else if k=7 then x=x-8:sp=s2:swap s2,s3:else if k=1 and pj=0 then pj=1
+1 ' Sistema de salto /jump system'
+60 if pj=1 and y=oldy-24 then pj=2 else if pj=1 then y=y-8 else if pj=2 then y=y+8:if y=oldy then pj=0
+1 ' Physics player & colision'
+70 if ex<x/8 and pc=0 then p=p+1:pc=1:play "l10o8gc":gosub 40 else c= base(5)+((y/8)+1)*32+(x/8)+1: if vpeek(c)>=192 then :play "l10o1c": goto 20:gosub 40
+1  'fisica bloque enemigo / physical enemy block
+80 ex=ex-ev:if ex<0 then ex=30:es=es+1:ec=ec+1:play "l10o4g":locate 0,19:print chr$(32):pc=0:if ec=10 then ev=ev+1:ec=0:bl$="":if es>224 then es=192
+1 ' Render system'
+90 putsprite 0,(x,y),9,sp:ob$=chr$(es): for i=0 to ev: ob$=ob$+chr$(32):next:locate ex,ey:print ob$: if ex=30 then for i=0 to ev: bl$=bl$+chr$(215):next:locate 0,ey+1:print bl$
+91 goto 50
 
 1 ' ------------------------------------'
 1 '             Enrity manager          '
