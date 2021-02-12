@@ -34,7 +34,7 @@
 1 ' Inicialización sistema y sprites / System initialization & sprites'
 10 screen 1,1,0:width 32:defint a-z:color 1,15,9:key off: s$="1C18183C3E183828 1C18183C3C181814 3818183C7C181C14 3818183C3C181828":ts=&h3800:l=1:for c=0 to 32:vpoke ts+c,VAL("&h"+MID$(s$,l,2)):l=l+2:next
 1 ' Menú de bienvenida, inicialización variables / Welcome menu, variable initialization'
-20 locate 8,10: print "!Presione una tecla":if inkey$="" then goto 20 else cls:x=16:y=144:s(0)=0:sp=0:s0=0:s1=1:s2=2:s3=3:ex=31:ey=19:es=192:ev=1
+20 locate 8,10: print "!Presione una tecla":if inkey$="" then goto 20 else cls:x=16:y=144:s(0)=0:sp=0:s0=0:s1=1:s2=2:s3=3:ex=31:ey=19:es=192:ev=1:p=0
 1 ' Dibujar pantalla del juego / Draw game screen
 30 for i=0 to 31:locate i,0:print chr$(215):locate i,20:print chr$(215):next:for i=0 to 20:locate 0,i: print chr$(215):locate 32, i: print chr$(215):next:play"l10o4g":gosub 40:goto 50
 1 ' GUI'
@@ -48,6 +48,5 @@
 1  'fisica bloque enemigo / physical enemy block
 80 ex=ex-ev:if ex<0 then ex=30:es=es+1:ec=ec+1:play "l10o4g":locate 0,19:print chr$(32):pc=0:if ec=10 then ev=ev+1:ec=0:bl$="":if es>224 then es=192
 1 ' Render system'
-90 putsprite 0,(x,y),9,sp:ob$=chr$(es): for i=0 to ev: ob$=ob$+chr$(32):next:locate ex,ey:print ob$: if ex=30 then for i=0 to ev: bl$=bl$+chr$(215):next:locate 0,ey+1:print bl$
-91 goto 50
-
+90 putsprite 0,(x,y),9,sp:ob$=chr$(es): for i=0 to ev: ob$=ob$+chr$(32):next:locate ex,ey:print ob$:if ex=30 then for i=0 to ev: bl$=bl$+chr$(215):next:locate 0,ey+1:print bl$
+100 goto 50
