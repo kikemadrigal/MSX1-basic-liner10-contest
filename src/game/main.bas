@@ -48,7 +48,7 @@
 1 'Phisic player & Colisión con paquete'
 1 'Si el player se ha salido de la pantalla volvemos a empezar'
 1 'Si hay colisión con un bloque sumamos un punto y mostramos la información'
-60 if y>160 then goto 30 else if x<ex*8 + 8 and  x+8 > ex*8 and y<ey*8+8 and 8+y>ey*8 then p=p+1:play "l10o8gc":ea=0: locate 5,21:print "Points: "p" life " v
+60 if y>160 then play "l10o4gc":goto 30 else if x<ex*8 + 8 and  x+8 > ex*8 and y<ey*8+8 and 8+y>ey*8 then p=p+1:play "l10o8gc":ea=0: locate 5,21:print "Points: "p" life " v
 1 'Vamos aumentando en 1 la y del paquete para que baje'
 1 'Si el paquete es mayor que la posición del enemigo 
 1 ' 1. Creamos otro paquete 
