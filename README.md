@@ -12,4 +12,4 @@ The game consists of jumping the obstacles that you will learn
 
 # Play online
 
-http://msx.tipolisto.es/webmsx/standalone/?disk=files/jump.dsk
+http://msx.tipolisto.es/webmsx/standalone/?disk=files/10liner.dsk
