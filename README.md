@@ -12,4 +12,6 @@ The game consists of jumping the obstacles that you will learn
 
 # Play online
 
+https://kikemadrigal.github.io/MSX1-basic-liner10-contest/?disk=juego.dsk
+
 http://msx.tipolisto.es/webmsx/standalone/?disk=files/10liner.dsk
