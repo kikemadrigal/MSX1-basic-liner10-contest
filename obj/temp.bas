@@ -1,3 +1,4 @@
+
 1 '         patrones sprites'
 1 '14336 / &h3800 ******************'
 1 '         Colores tiles'
@@ -48,7 +49,7 @@
 1 'Phisic player & Colisión con paquete'
 1 'Si el player se ha salido de la pantalla volvemos a empezar'
 1 'Si hay colisión con un bloque sumamos un punto y mostramos la información'
-60 if y>160 then play "l10o4gc":goto 30 else if x<ex*8 + 8 and  x+8 > ex*8 and y<ey*8+8 and 8+y>ey*8 then p=p+1:play "l10o8gc":ea=0: locate 5,21:print "Points: "p" life " v
+60 if y>160 then play "l10o4gc":goto 30 else if x<ex*8 + 8 and  x+8 > ex*8 and y<ey*8+8 and 8+y>ey*8 then p=p+1:play "l10o8gc":ea=0: locate 5,21:print "Points: "p
 1 'Vamos aumentando en 1 la y del paquete para que baje'
 1 'Si el paquete es mayor que la posición del enemigo 
 1 ' 1. Creamos otro paquete 
@@ -59,9 +60,6 @@
 1 'Comprobamos el suelo, si el suelo no es el tile del suelo hacemos que caiga'
 80 locate ex,ey-1: print chr$(32):if ea=1 then locate ex,ey:print chr$(es): t= base(5)+((y/8)+2)*32+(x/8)+1: if vpeek(t)<>215 then y=y+8
 90 putsprite 0,(x,y),9,sp:goto 50
-
-
-
 1 ' ------------------------------------'
 1 '             Enrity manager          '
 1 ' ------------------------------------'

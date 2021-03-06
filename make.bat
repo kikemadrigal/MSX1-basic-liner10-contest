@@ -135,7 +135,7 @@ rem Esta función prepará los archivos fuente pata incluirlos en un dsk, cas
 
     rem lo tokenizamos
     rem if not exist tools\tokenizer\msxbatoken.py GOTO :not_exist_tokenizer
-    start /wait tools\tokenizer\msxbatoken.py obj\game.bad
+    rem start /wait tools\tokenizer\msxbatoken.py obj\game.bad
     rem escribe tyoe /? y find /? paa más ayuda
     rem type obj\temp.bas | find /V  "1 '"  > obj\game.bas
     echo Comentarios eliminados y creado game.bas tokenizado

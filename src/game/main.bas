@@ -1,3 +1,4 @@
+
 1 '         patrones sprites'
 1 '14336 / &h3800 ******************'
 1 '         Colores tiles'
@@ -59,6 +60,3 @@
 1 'Comprobamos el suelo, si el suelo no es el tile del suelo hacemos que caiga'
 80 locate ex,ey-1: print chr$(32):if ea=1 then locate ex,ey:print chr$(es): t= base(5)+((y/8)+2)*32+(x/8)+1: if vpeek(t)<>215 then y=y+8
 90 putsprite 0,(x,y),9,sp:goto 50
-
-
-
