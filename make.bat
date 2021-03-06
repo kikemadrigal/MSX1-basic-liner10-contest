@@ -179,6 +179,7 @@ rem Creará un nuevo archivo .dsk con los archivos .bin y .bas especificados
     rem por favor mirar for /?
     for /R bin/ %%a in (*.*) do (
         start /wait tools/Disk-Manager-v0.17/DISKMGR.exe -A -F -C %TARGET_DSK% "%%a")   
+    copy %TARGET_DSK% .\docs
 goto:eof
 
 
