@@ -68,7 +68,7 @@
 1 '     Si la fase llega a 20 final'
 1 '         Si los que faltan por coger son 0'
 1 '90 if s<=0 then goto 30 else if f=20 then cls: locate 0,10: print "Congratulations, you've reached the end of the game!" else if r=0 then f=f+1:ev=ev+0.25:locate 1,21:print "Points:"p"catch:"r"level:"f:goto 40 else goto 50
-90 if f=20 then cls: locate 0,10: print "Congratulations, you've reached the end of the game!" else if r=0 then f=f+1:ev=ev+1:locate 1,21:print "Points:"p"catch:"r"level:"f:goto 40 else goto 50
+90 if s<=0 then goto 30 else if f=20 then cls: locate 0,10: print "Congratulations, you've reached the end of the game!" else if r=0 then f=f+1:ev=ev+1:locate 1,21:print "Points:"p"catch:"r"level:"f:goto 40 else goto 50
 1 ' ------------------------------------'
 1 '             Enrity manager          '
 1 ' ------------------------------------'

@@ -6,4 +6,4 @@
 60ify>160thenplay"l10o4gc":fori=0to100:color,,8:f=0:ev=1:color,,13:next:goto30elseifx<ex*8+8andx+8>ex*8andy<ey*8+8and8+y>ey*8andea=1thenp=p+1:r=r-1:play"l10o8gc":ea=0:time=0:locate1,21:print"Points:"p"catch:"r"level:"f
 70s=10-int(time/60):locate1,22:prints:ey=ey+ev:ifey>20thenex=rnd(1)*(30-2)+2:ey=6:es=es+1:ea=1:putsprite1,(ex*8,1),4,4:ifes>215thenes=192
 80putsprite0,(x,y),9,sp:locateex,ey-ev:printchr$(32):ifea=1thenlocateex,ey:printchr$(es):t=base(5)+((y/8)+2)*32+(x/8)+1:ifvpeek(t)<>215theny=y+8
-90 if f=20 then cls: locate 0,10: print "Congratulations, you've reached the end of the game" else if r=0 then f=f+1:ev=ev+1:locate 1,21:print "Points:"p"catch:"r"level:"f:goto 40 else goto 50
+90 if s<=0 then goto 30 else if f=20 then cls: locate 0,10: print "Congratulations, you've reached the end of the game" else if r=0 then f=f+1:ev=ev+1:locate 1,21:print "Points:"p"catch:"r"level:"f:goto 40 else goto 50
