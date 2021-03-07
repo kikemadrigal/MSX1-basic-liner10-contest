@@ -36,34 +36,39 @@
 1 ''
 
 1 ' Inicialización sistema y variables globales
-10 color 1,11,13:screen 1,1,0:width 32:defint a-z:key off:ts=&h3800:l=1:es=192:ey=190:sp=0:s0=0:s1=1:s2=2:s3=3:v=5:r=2:f=0
+10 color 1,11,13:screen 1,1,0:width 32:defint a-z:key off:ts=&h3800:l=1:es=192:ex=15:ey=7:ev=1:sp=0:s0=0:s1=1:s2=2:s3=3:r=em:em=2:f=0:putsprite 1,(ex*8,1),4,4:ea=1
 1 'Definición de sprites: 1 player derecha, 2 player derecha movimiento, 3 player izquierda, 4 player izquierda movimeinto,5. enemigo 1,6.enemigo 2' 
 1 'Despues de inicializar saltamos a la línea 40'
 20 s$="1C18183C3E183828 1C18183C3C181814 3818183C7C181C14 3818183C3C181828 0000000018187EBD 000000425A5A7E3C":for c=0 to 48:vpoke ts+c,VAL("&h"+MID$(s$,l,2)):l=l+2:next
+1 ' Menú de bienvenida, Inicio juego
+30 locate 0,10: print "Objective: Get to level 20, to get poniter capture the objects before they hit the ground! ":if inkey$="" then goto 30 else cls:x=100:y=144:ey=6:p=0:time=0:s=10-int(time/60)
 
 
-
-
-1 ' Menú de bienvenida, inicialización juego y creamos un paquete
-30 locate 0,10: print "Objective: Get to level 10, to get poniter capture the objects before they hit the ground! ":if inkey$="" then goto 30 else cls:x=100:y=144:r=2:ey=190:locate 1,21:print "Points:"p"catch:"r"level:"f"      "
-1 ' Dibujar pantalla del juego y hacemos un sonido / Draw game screen
-40 for i=0 to 31:locate i,4:print chr$(215):locate i,20:print chr$(215):next:for i=0 to 20:locate 0,i: print chr$(215):locate 32, i: print chr$(215):next:play"l10o4g"
+1 ' Inicio si cambias de fase
+40 if ev>2 then ev=1 else r=em:locate 1,21:print "Points:"p"catch:"r"level:"f:if f=0 then for i=0 to 31:locate i,2:print chr$(215):locate i,20:print chr$(215):next:for i=0 to 20:locate 0,i: print chr$(215):locate 32, i: print chr$(215):next:play"l10o4g"
 1 ' Sistema de input & physics & main loop, cambiamos el sprite si se mueve'
+1 '50 tr= base(5)+((y/8)+1)*32+(x/8)+2:tl= base(5)+((y/8)+1)*32+(x/8):k=stick(0):if k=3 and vpeek(tr)<192 then x=x+8:sp=s0:swap s0,s1:else if k=7 and vpeek(tl)<192 then x=x-8:sp=s2:swap s2,s3
 50 k=stick(0):if k=3 then x=x+8:sp=s0:swap s0,s1:else if k=7 then x=x-8:sp=s2:swap s2,s3
 1 'Phisic player & Colisión con paquete'
 1 'Si el player se ha salido de la pantalla volvemos a empezar'
 1 'Si no se ha salido comprobamos las colisiones con los objetos, si hay una colisión con un bloque sumamos un punto y mostramos la información'
-60 if y>160 then play "l10o4gc":for i=0 to 100: color,,8:f=0:ev=1:color,,13:next:goto 30 else if x<ex*8 + 8 and  x+8 > ex*8 and y<ey*8+8 and 8+y>ey*8 then p=p+1:r=r-1:play "l10o8gc":ea=0: locate 1,21:print "Points:"p"catch:"r"level:"f
+1 '60 if y>160 then play "l10o4gc":for i=0 to 100: color,,8:f=0:ev=1.25:color,,13:next:goto 30 else if x<ex*8 + 8 and  x+8 > ex*8 and y<ey*8+8 and 8+y>ey*8 and ea=1 then p=p+1:r=r-1:play "l10o8gc":ea=0: time=0:locate 1,21:print "Points:"p"catch:"r"level:"f
+60 if y>160 then play "l10o4gc":for i=0 to 100: color,,8:f=0:ev=1:color,,13:next:goto 30 else if x<ex*8 + 8 and  x+8 > ex*8 and y<ey*8+8 and 8+y>ey*8 and ea=1 then p=p+1:r=r-1:play "l10o8gc":ea=0: time=0:locate 1,21:print "Points:"p"catch:"r"level:"f
 1 'Vamos aumentando en 1 la y del paquete para que baje'
 1 'Si el paquete es mayor que la posición del enemigo 
 1 ' 1. Creamos otro paquete 
 1 ' 2. Mostramos al personaje de arriba en la posición ueva del paquete'
 1 ' 3. Si el paquete es un sprite mayor que 215 lo ponemos en 192'
-70 ey=ey+ev:if ey>(y/8)+2 then v=v-1:ex=rnd(1)*(30-2)+2:ey=6:es=es+1:ev=1:ec=0:ea=1:putsprite 1,(ex*8,2*8),13,4:if es>215 then es=192
-1 'Pintamos el bloque que cae'
+70 s=10-int(time/60):locate 1,22:print s :ey=ey+ev:if ey>20 then ex=rnd(1)*(30-2)+2:ey=6:es=es+1:ea=1:putsprite 1,(ex*8,1),4,4:if es>215 then es=192
+1 'Pintamos el bloque que cae print "S"s"ey"ey"ev"ev"ea"ea  
 1 'Comprobamos el suelo, si el suelo no es el tile del suelo hacemos que caiga'
-80 putsprite 0,(x,y),9,sp:locate ex,ey-1: print chr$(32):if ea=1 then locate ex,ey:print chr$(es): t= base(5)+((y/8)+2)*32+(x/8)+1: if vpeek(t)<>215 then y=y+8 
-90 if f=10 then cls: locate 0,10: print "Congratulations, you've reached the end of the game!" else if r=0 then f=f+1:ev=ev+1:goto 30 else goto 50
+80 putsprite 0,(x,y),9,sp:locate ex,ey-ev: print chr$(32):if ea=1 then locate ex,ey:print chr$(es): t= base(5)+((y/8)+2)*32+(x/8)+1: if vpeek(t)<>215 then y=y+8 
+1 'Si los segundos llegan a 0 empezamos'
+1 'Si los segundo no llegan a 0'
+1 '     Si la fase llega a 20 final'
+1 '         Si los que faltan por coger son 0'
+1 '90 if s<=0 then goto 30 else if f=20 then cls: locate 0,10: print "Congratulations, you've reached the end of the game!" else if r=0 then f=f+1:ev=ev+0.25:locate 1,21:print "Points:"p"catch:"r"level:"f:goto 40 else goto 50
+90 if f=20 then cls: locate 0,10: print "Congratulations, you've reached the end of the game!" else if r=0 then f=f+1:ev=ev+1:locate 1,21:print "Points:"p"catch:"r"level:"f:goto 40 else goto 50
 1 ' ------------------------------------'
 1 '             Enrity manager          '
 1 ' ------------------------------------'
